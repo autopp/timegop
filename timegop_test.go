@@ -1,17 +1,31 @@
-package timegop
+package timegop_test
 
 import (
-	"testing"
 	"time"
+
+	. "github.com/autopp/timegop"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
-func TestFreeze(t *testing.T) {
-	freezedTime := time.Date(2017, time.December, 6, 9, 29, 0, 0, time.Local)
-	Freeze(freezedTime)
-	expected := freezedTime.UnixNano()
-	actual := Now().UnixNano()
+var _ = Describe("Timegop", func() {
+	Describe("Now", func() {
+		Context("Without Freeze()", func() {
+			It("Returns real time", func() {
+				Expect(Now().UnixNano()).To(BeNumerically("~", time.Now().UnixNano(), 1000))
+			})
+		})
 
-	if expected != actual {
-		t.Errorf("actual = %d, expected = %d", actual, expected)
-	}
-}
+		Context("With Freeze()", func() {
+			freezedTime := time.Date(2017, time.December, 6, 9, 29, 0, 0, time.Local)
+
+			JustBeforeEach(func() {
+				Freeze(freezedTime)
+			})
+
+			It("Returns freezed time", func() {
+				Expect(Now().UnixNano()).To(Equal(freezedTime.UnixNano()))
+			})
+		})
+	})
+})
