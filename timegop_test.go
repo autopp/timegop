@@ -12,7 +12,7 @@ var _ = Describe("Timegop", func() {
 	Describe("Now", func() {
 		Context("Without Freeze()", func() {
 			It("Returns real time", func() {
-				Expect(Now().UnixNano()).To(BeNumerically("~", time.Now().UnixNano(), 1000))
+				Expect(Now()).To(BeTemporally("~", time.Now(), time.Millisecond))
 			})
 		})
 
@@ -24,7 +24,7 @@ var _ = Describe("Timegop", func() {
 			})
 
 			It("Returns freezed time", func() {
-				Expect(Now().UnixNano()).To(Equal(freezedTime.UnixNano()))
+				Expect(Now()).To(BeTemporally("==", freezedTime))
 			})
 		})
 	})
