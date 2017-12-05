@@ -19,3 +19,7 @@ func Now() time.Time {
 		return time.Now()
 	}
 }
+
+func Return() {
+	frozen = false
+}
