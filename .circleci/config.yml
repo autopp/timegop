@@ -20,7 +20,8 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            go get .
+            go get github.com/onsi/ginkgo/ginkgo
+            go get github.com/onsi/gomega
 
       # run unit tests
       - run:
