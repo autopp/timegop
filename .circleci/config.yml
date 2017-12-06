@@ -22,8 +22,14 @@ jobs:
           command: |
             go get github.com/onsi/ginkgo/ginkgo
             go get github.com/onsi/gomega
+            go get -u github.com/golang/lint/golint
 
       # run unit tests
       - run:
           name: run unit tests
           command: ginkgo
+
+      # run lint
+      - run:
+          name: check code
+          command: golint
