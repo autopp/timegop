@@ -1,3 +1,4 @@
+// Package timegop provides stubing time.Now
 package timegop
 
 import (
