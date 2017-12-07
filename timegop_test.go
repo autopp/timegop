@@ -6,15 +6,20 @@ import (
 	. "github.com/autopp/timegop"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/types"
 )
 
 var _ = Describe("Timegop", func() {
+	BeRealTime := func() types.GomegaMatcher {
+		return BeTemporally("~", time.Now(), time.Millisecond)
+	}
+
 	Describe("Now()", func() {
 		freezedTime := time.Date(2017, time.December, 6, 9, 29, 0, 0, time.Local)
 
 		Context("Without Freeze()", func() {
 			It("Returns real time", func() {
-				Expect(Now()).To(BeTemporally("~", time.Now(), time.Millisecond))
+				Expect(Now()).To(BeRealTime())
 			})
 		})
 
@@ -35,7 +40,7 @@ var _ = Describe("Timegop", func() {
 			})
 
 			It("Returns real time", func() {
-				Expect(Now()).To(BeTemporally("~", time.Now(), time.Millisecond))
+				Expect(Now()).To(BeRealTime())
 			})
 		})
 	})
