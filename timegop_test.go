@@ -43,5 +43,15 @@ var _ = Describe("Timegop", func() {
 				Expect(Now()).To(BeRealTime())
 			})
 		})
+
+		Context("With Freeze() and defered calling returned value", func() {
+			JustBeforeEach(func() {
+				defer Freeze(freezedTime)()
+			})
+
+			It("Returns real time", func() {
+				Expect(Now()).To(BeRealTime())
+			})
+		})
 	})
 })

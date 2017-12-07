@@ -25,9 +25,11 @@ var frozen = false
 var freezedTime time.Time
 
 // Freeze fixes current time as given t
-func Freeze(t time.Time) {
+func Freeze(t time.Time) func() {
 	frozen = true
 	freezedTime = t
+
+	return Return
 }
 
 // Now returns a fixed time if Freeze is called, otherwise a real time
