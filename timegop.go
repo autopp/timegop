@@ -34,10 +34,10 @@ func Freeze(t time.Time) func() {
 
 // Now returns a fixed time if Freeze is called, otherwise a real time
 func Now() time.Time {
-	if frozen {
-		return freezedTime
+	if !frozen {
+		return time.Now()
 	}
-	return time.Now()
+	return freezedTime
 }
 
 // Return disable time fixing
