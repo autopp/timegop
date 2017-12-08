@@ -15,7 +15,7 @@ var _ = Describe("Timegop", func() {
 	}
 
 	Describe("Now()", func() {
-		freezedTime := time.Date(2017, time.December, 6, 9, 29, 0, 0, time.Local)
+		t := time.Date(2017, time.December, 6, 9, 29, 0, 0, time.Local)
 
 		Context("Without Freeze()", func() {
 			It("Returns real time", func() {
@@ -25,17 +25,17 @@ var _ = Describe("Timegop", func() {
 
 		Context("With Freeze()", func() {
 			JustBeforeEach(func() {
-				Freeze(freezedTime)
+				Freeze(t)
 			})
 
 			It("Returns freezed time", func() {
-				Expect(Now()).To(BeTemporally("==", freezedTime))
+				Expect(Now()).To(BeTemporally("==", t))
 			})
 		})
 
 		Context("With Freeze() and Return()", func() {
 			JustBeforeEach(func() {
-				Freeze(freezedTime)
+				Freeze(t)
 				Return()
 			})
 
@@ -46,7 +46,7 @@ var _ = Describe("Timegop", func() {
 
 		Context("With Freeze() and defered calling returned value", func() {
 			JustBeforeEach(func() {
-				defer Freeze(freezedTime)()
+				defer Freeze(t)()
 			})
 
 			It("Returns real time", func() {
