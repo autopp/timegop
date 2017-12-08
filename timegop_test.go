@@ -28,6 +28,10 @@ var _ = Describe("Timegop", func() {
 				Freeze(t)
 			})
 
+			AfterEach(func() {
+				Return()
+			})
+
 			It("Returns freezed time", func() {
 				Expect(Now()).To(BeTemporally("==", t))
 			})
