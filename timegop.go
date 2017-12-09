@@ -44,3 +44,13 @@ func Now() time.Time {
 func Return() {
 	frozen = false
 }
+
+func Since(t time.Time) time.Duration {
+	var d time.Duration
+	return d
+}
+
+func Until(t time.Time) time.Duration {
+	var d time.Duration
+	return d
+}
