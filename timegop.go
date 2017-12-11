@@ -52,6 +52,5 @@ func Since(t time.Time) time.Duration {
 
 // Until returns the duration until t. It is shorthand for t.Sub(time.Now())
 func Until(t time.Time) time.Duration {
-	var d time.Duration
-	return d
+	return t.Sub(Now())
 }
