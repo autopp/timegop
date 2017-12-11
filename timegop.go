@@ -47,8 +47,7 @@ func Return() {
 
 // Since returns the time elapsed since t. It is shorthand for time.Now().Sub(t).
 func Since(t time.Time) time.Duration {
-	var d time.Duration
-	return d
+	return Now().Sub(t)
 }
 
 // Until returns the duration until t. It is shorthand for t.Sub(time.Now())
