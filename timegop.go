@@ -32,6 +32,10 @@ func Freeze(t time.Time) func() {
 	return Return
 }
 
+func Travel(t time.Time) func() {
+	return nil
+}
+
 // Now returns a fixed time if Freeze is called, otherwise a real time
 func Now() time.Time {
 	if !frozen {
