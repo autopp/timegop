@@ -32,6 +32,7 @@ const (
 
 var currentMode mode = natural
 var traveledTime time.Time
+var whenTraveled time.Time
 
 // Freeze fixes current time as given t
 func Freeze(t time.Time) func() {
@@ -41,6 +42,9 @@ func Freeze(t time.Time) func() {
 }
 
 func Travel(t time.Time) func() {
+	whenTraveled = time.Now()
+	currentMode = traveling
+	traveledTime = t
 	return Return
 }
 
@@ -51,6 +55,8 @@ func Now() time.Time {
 		return time.Now()
 	case freezing:
 		return traveledTime
+	case traveling:
+		return traveledTime.Add(time.Since(whenTraveled))
 	}
 	panic(fmt.Sprintf("undefined mode %d", currentMode))
 }

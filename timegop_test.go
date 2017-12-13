@@ -61,7 +61,7 @@ var _ = Describe("Timegop", func() {
 		Context("With Travel() and sleep 50ms", func() {
 			JustBeforeEach(func() {
 				Travel(t)
-				time.Sleep(50 * time.Millisecond)
+				time.Sleep(100 * time.Millisecond)
 			})
 
 			AfterEach(func() {
@@ -69,7 +69,7 @@ var _ = Describe("Timegop", func() {
 			})
 
 			It("Returns freezed time + 50ms", func() {
-				Expect(Now()).To(BeTemporally("~", t.Add(50*time.Millisecond), time.Millisecond))
+				Expect(Now()).To(BeTemporally("~", t.Add(100*time.Millisecond), 5*time.Millisecond))
 			})
 		})
 	})
