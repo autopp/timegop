@@ -18,35 +18,46 @@
 package timegop
 
 import (
+	"fmt"
 	"time"
 )
 
-var frozen = false
-var freezedTime time.Time
+type mode int
+
+const (
+	natural mode = iota
+	freezing
+	traveling
+)
+
+var currentMode mode = natural
+var traveledTime time.Time
 
 // Freeze fixes current time as given t
 func Freeze(t time.Time) func() {
-	frozen = true
-	freezedTime = t
-
+	currentMode = freezing
+	traveledTime = t
 	return Return
 }
 
 func Travel(t time.Time) func() {
-	return nil
+	return Return
 }
 
 // Now returns a fixed time if Freeze is called, otherwise a real time
 func Now() time.Time {
-	if !frozen {
+	switch currentMode {
+	case natural:
 		return time.Now()
+	case freezing:
+		return traveledTime
 	}
-	return freezedTime
+	panic(fmt.Sprintf("undefined mode %d", currentMode))
 }
 
 // Return disable time fixing
 func Return() {
-	frozen = false
+	currentMode = natural
 }
 
 // Since returns the time elapsed since t. It is shorthand for time.Now().Sub(t).
