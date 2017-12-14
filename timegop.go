@@ -41,6 +41,7 @@ func Freeze(t time.Time) func() {
 	return Return
 }
 
+// Travel move to the given time
 func Travel(t time.Time) func() {
 	whenTraveled = time.Now()
 	currentMode = traveling
@@ -66,12 +67,12 @@ func Return() {
 	currentMode = natural
 }
 
-// Since returns the time elapsed since t. It is shorthand for time.Now().Sub(t).
+// Since returns the time elapsed since t. It is shorthand for timegop.Now().Sub(t).
 func Since(t time.Time) time.Duration {
 	return Now().Sub(t)
 }
 
-// Until returns the duration until t. It is shorthand for t.Sub(time.Now())
+// Until returns the duration until t. It is shorthand for t.Sub(timegop.Now())
 func Until(t time.Time) time.Duration {
 	return t.Sub(Now())
 }
