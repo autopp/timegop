@@ -1,5 +1,7 @@
 # Timegop
 
+[![CircleCI](https://circleci.com/gh/autopp/timegop.svg?style=shield)](https://circleci.com/gh/autopp/timegop)
+
 `timegop` is a Go library to fix/disguise current time.  
 This is useful for tests involving time.
 
